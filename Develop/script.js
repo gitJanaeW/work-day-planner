@@ -29,9 +29,14 @@ $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
     }
     else if(clickCount === 2){
         endTime = targetEl;
-        showModal();
+        targetTimeRange();
     }
+
 });
+
+function targetTimeRange(){
+    startTime
+}
 
 function showModal(){
     // On click, show modal
