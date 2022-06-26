@@ -28,9 +28,95 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
-    </div>
+
+    <!-- Timeblocks go here -->
+    <main class="schedule-block">
+      <!-- <table>
+        <thead>
+          <tr class="col-7 d-flex justify-content-around">
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+          </tr>
+        </thead>
+      </table> -->
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">9AM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1 border-0 bg-light">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">10AM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">11AM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">12PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">1PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">2PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">3PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">4PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block bg-light col-1 d-flex justify-content-center">5PM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1">SAVE</button>
+      </div>
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
