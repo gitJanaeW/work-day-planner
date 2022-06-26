@@ -46,7 +46,7 @@
         </thead>
       </table> -->
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">9AM</div>
+        <div class="time-block time-0 bg-light col-1 d-flex justify-content-center">9AM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -54,7 +54,15 @@
         <button class="col-1 border-0 bg-light">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">10AM</div>
+        <div class="time-block time-1 bg-light col-1 d-flex justify-content-center">10AM</div>
+        <section class="half-hours col-7 p-0">
+          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
+          <div class="second-half-hr border p-0 py-3"></div>
+        </section>
+        <button class="col-1 rounded-right">SAVE</button>
+      </div>
+      <div class="row g-0 d-flex justify-content-center">
+        <div class="time-block time-2 bg-light col-1 d-flex justify-content-center">11AM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -62,7 +70,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">11AM</div>
+        <div class="time-block time-3 bg-light col-1 d-flex justify-content-center">12PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -70,7 +78,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">12PM</div>
+        <div class="time-block time-4 bg-light col-1 d-flex justify-content-center">1PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -78,7 +86,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">1PM</div>
+        <div class="time-block time-5 bg-light col-1 d-flex justify-content-center">2PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -86,7 +94,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">2PM</div>
+        <div class="time-block time-6 bg-light col-1 d-flex justify-content-center">3PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -94,7 +102,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">3PM</div>
+        <div class="time-block time-7 bg-light col-1 d-flex justify-content-center">4PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -102,15 +110,7 @@
         <button class="col-1">SAVE</button>
       </div>
       <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">4PM</div>
-        <section class="half-hours col-7 p-0">
-          <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
-          <div class="second-half-hr border p-0 py-3"></div>
-        </section>
-        <button class="col-1">SAVE</button>
-      </div>
-      <div class="row g-0 d-flex justify-content-center">
-        <div class="time-block bg-light col-1 d-flex justify-content-center">5PM</div>
+        <div class="time-block time-8 bg-light col-1 d-flex justify-content-center">5PM</div>
         <section class="half-hours col-7 p-0">
           <div class="first-half-hr border border-bottom-0 p-0 py-3"></div>
           <div class="second-half-hr border p-0 py-3"></div>
@@ -119,7 +119,19 @@
       </div>
     </main>
 
+    <!-- Modal -->
+    <button type="button" class="btn btn-primary modal-btn" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <h1>Add event details</h1>
+          <input type="text" class="input"/>
+        </div>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
