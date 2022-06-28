@@ -19,29 +19,38 @@ $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
     // Save target with text trim
     var trim = $(e.target).text().trim();
     // Create a input element
-    var textInput = $("<input>").val(trim).attr("class", "col-12").trigger("focus");
+    var textInput = $("<input>").val(trim).attr("class", "col-12 input-to-div").trigger("focus");
     // Replace div with input for user to type in
     $(e.target).replaceWith(textInput);
 });
 
 // WHEN AN OFF-CLICK (aka "BLUR") OCCURS...
-$(".half-hour").on("blur", "input", function(){
+$("main").on("blur", "input", function(){
+    console.log("It works");
     // If user inputs nothing...
     if(!$(this).val()){
+        $(this).replaceWith(initialDiv);
         return;
     }
     else{
         // Trim the input value
         var text = $(this).val().trim();
         // Add the input value to initialDiv
-        initialDiv.text(text);
+        $(initialDiv).text(text);
         console.log("initialDiv", initialDiv);
         // Replace initial div with 
         $(this).replaceWith(initialDiv);
+        // Reassign classes
+        if($(initialDiv).hasClass("first-half")){
+            $(initialDiv).attr("class", "half-hr first-half-hr border border-bottom-0 px-2 py-1");
+        }
+        else{
+            $(initialDiv).attr("class", "half-hr second-half-hr border px-2 py-1");
+        }
     }
         
     // Color before/during/after time slots with Moment.js
-    timeBlock = e.target.parent().dataset("time");
+    timeBlock = $(e.target).parent().dataset("time");
     colorTimeSlots(e.target);
 });
 
