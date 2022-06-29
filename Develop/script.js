@@ -1,15 +1,53 @@
 // NOTES:
-// Click and blur both don't seem to be working
 // Struggling with moment.js time blocks
 
 var main = $(".schedule-block");
 var m = moment().format("dddd, MMMM Do, YYYY, h:mm a");
 var clickCount = 0;
 var initialDiv = undefined;
+var i = 0;
 
 // TIMER
 $(".date").text(m);
-moment().hour
+// moment().hour();
+
+// COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
+function colorTimeSlots(){
+    debugger;
+    // Access half hour time block's parent data.time
+    var timeBlock = $(".half-hours").data("time"); // This is causing an issue for some reason
+    // If the time block has been passed
+    if(timeBlock < moment().hour(14)){
+        console.log("before");
+    }// If the time block is active
+    else if(timeBlock === moment().hour(14)){
+        console.log("during");
+    }// If the time block has not been passed
+    else{
+        console.log("after");
+    }
+}
+
+// COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
+function colorTimeSlots(){
+    debugger;
+    // Access half hour time block's parent data.time
+    var timeBlock = $(".half-hours");
+    console.log(timeBlock[i].data);
+    // If the time block has been passed
+    if(timeBlock[i].data("time") < moment().hour(14)){
+        console.log("before");
+    }// If the time block matches the current hour
+    else if(timeBlock[i].data("time") === moment().hour(14)){
+        console.log("during");
+    }// If the time block has not been passed
+    else{
+        console.log("after");
+    }
+    i++;
+}
+
+$(".half-hour").each(colorTimeSlots);
 
 // WHEN A TIME BLOCK IS CLICKED...
 $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
@@ -19,9 +57,11 @@ $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
     // Save target with text trim
     var trim = $(e.target).text().trim();
     // Create a input element
-    var textInput = $("<input>").val(trim).attr("class", "col-12 input-to-div").trigger("focus");
+    var textInput = $("<input>").val(trim).attr("class", "col-12 input-to-div");
     // Replace div with input for user to type in
-    $(e.target).replaceWith(textInput);
+    $(initialDiv).replaceWith(textInput);
+    // Autofocus on new textInput
+    $(textInput).focus();
 });
 
 // WHEN AN OFF-CLICK (aka "BLUR") OCCURS...
@@ -50,28 +90,9 @@ $("main").on("blur", "input", function(){
     }
         
     // Color before/during/after time slots with Moment.js
-    timeBlock = $(e.target).parent().dataset("time");
-    colorTimeSlots(e.target);
+    timeBlock = $(initialDiv).parent().data.time;
+    i++;
 });
-
-// COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
-function colorTimeSlots(timeBlock){
-    debugger;
-    timeBlock = timeBlock.parent().dataset("time");
-    // If the time block has been passed
-    if(timeBlock < moment().hour()){
-        console.log("before");
-    }// If the time block is active
-    else if(timeBlock === moment().hour()){
-        console.log("during");
-    }// If the time block has not been passed
-    else{
-        console.log("after");
-    }
-
-}
-
-
 
 
 
