@@ -35,15 +35,18 @@ function colorTimeSlots(hour){
 function retrieveTasks(){
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    
-}
-
-function saveTasks(task){
     debugger;
+    console.log(savedTasks);
+}
+retrieveTasks();
+
+function saveTasks(task, placement){
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    // Pair the task and its placement in an array
+    var taskPlacePair = [task, placement];
     // Push new task to your array
-    savedTasks.push(task);
+    savedTasks.push(taskPlacePair);
     // Then push the updated array to localStorage as a string
     localStorage.setItem("tasks", JSON.stringify(savedTasks));
 }
@@ -52,7 +55,7 @@ colorTimeSlots();
 
 // WHEN A TIME BLOCK IS CLICKED...
 $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
-    console.log(e.target);
+    console.log("TARGET: ", e.target);
     // Save the inital empty div
     initialDiv = e.target;
     // Save target with text trim
@@ -92,7 +95,7 @@ $("main").on("blur", "input", function(){
     
 
     // Save changes
-    saveTasks($(initialDiv).text());
+    saveTasks($(initialDiv).text(), $(initialDiv));
 });
 
 
