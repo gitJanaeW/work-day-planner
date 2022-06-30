@@ -40,13 +40,11 @@ function retrieveTasks(){
 }
 retrieveTasks();
 
-function saveTasks(task, placement){
+function saveTasks(task){
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    // Pair the task and its placement in an array
-    var taskPlacePair = [task, placement];
     // Push new task to your array
-    savedTasks.push(taskPlacePair);
+    savedTasks.push(task);
     // Then push the updated array to localStorage as a string
     localStorage.setItem("tasks", JSON.stringify(savedTasks));
 }
@@ -95,7 +93,7 @@ $("main").on("blur", "input", function(){
     
 
     // Save changes
-    saveTasks($(initialDiv).text(), $(initialDiv));
+    saveTasks($(initialDiv));
 });
 
 
