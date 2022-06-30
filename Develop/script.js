@@ -1,6 +1,3 @@
-// NOTES:
-// Struggling with moment.js time blocks
-
 var main = $(".schedule-block");
 var m = moment().format("dddd, MMMM Do, YYYY, h:mm a");
 var clickCount = 0;
@@ -9,45 +6,49 @@ var i = 0;
 
 // TIMER
 $(".date").text(m);
-// moment().hour();
+var currentM = moment().hour();
 
-// COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
-function colorTimeSlots(){
-    debugger;
-    // Access half hour time block's parent data.time
-    var timeBlock = $(".half-hours").data("time"); // This is causing an issue for some reason
-    // If the time block has been passed
-    if(timeBlock < moment().hour(14)){
-        console.log("before");
-    }// If the time block is active
-    else if(timeBlock === moment().hour(14)){
-        console.log("during");
-    }// If the time block has not been passed
-    else{
-        console.log("after");
+// $(".half-hours")[1].css("background-color", "yellow"); // jQuery way not working
+// $(".half-hours")[1].style.backgroundColor = "red"; // JS way working
+
+// // COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
+function colorTimeSlots(hour){
+
+    for(var i = 9; i < 18; i++){ // For as long as the ours in a work day (military time)...
+        // Establish the current timeBlock
+        var timeBlock = $("section#" + i + "");
+        // Access timeBlock id num
+        var timeBlockNum = parseInt(timeBlock[0].id);
+        // Compare id num to current time num and color accordingly
+        if(timeBlockNum < currentM){
+            $(timeBlock).addClass("bg-secondary text-light");
+        }
+        else if(timeBlockNum === currentM){
+            $(timeBlock).addClass("bg-success text-light");
+        }
+        else if(timeBlockNum > currentM){
+            $(timeBlock).addClass("bg-warning");
+        }
     }
 }
 
-// COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
-function colorTimeSlots(){
-    debugger;
-    // Access half hour time block's parent data.time
-    var timeBlock = $(".half-hours");
-    console.log(timeBlock[i].data);
-    // If the time block has been passed
-    if(timeBlock[i].data("time") < moment().hour(14)){
-        console.log("before");
-    }// If the time block matches the current hour
-    else if(timeBlock[i].data("time") === moment().hour(14)){
-        console.log("during");
-    }// If the time block has not been passed
-    else{
-        console.log("after");
-    }
-    i++;
+function retrieveTasks(){
+    // Retrieve localStorage as an array, if any. If not, create a new array
+    var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    
 }
 
-$(".half-hour").each(colorTimeSlots);
+function saveTasks(task){
+    debugger;
+    // Retrieve localStorage as an array, if any. If not, create a new array
+    var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    // Push new task to your array
+    savedTasks.push(task);
+    // Then push the updated array to localStorage as a string
+    localStorage.setItem("tasks", JSON.stringify(savedTasks));
+}
+
+colorTimeSlots();
 
 // WHEN A TIME BLOCK IS CLICKED...
 $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
@@ -66,18 +67,18 @@ $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
 
 // WHEN AN OFF-CLICK (aka "BLUR") OCCURS...
 $("main").on("blur", "input", function(){
-    console.log("It works");
+    // Trim the input value
+    var text = $(this).val().trim();
+
     // If user inputs nothing...
-    if(!$(this).val()){
+    if(!$(".input-to-div").val()){
+        $(initialDiv).val("");
         $(this).replaceWith(initialDiv);
         return;
     }
     else{
-        // Trim the input value
-        var text = $(this).val().trim();
         // Add the input value to initialDiv
         $(initialDiv).text(text);
-        console.log("initialDiv", initialDiv);
         // Replace initial div with 
         $(this).replaceWith(initialDiv);
         // Reassign classes
@@ -88,13 +89,11 @@ $("main").on("blur", "input", function(){
             $(initialDiv).attr("class", "half-hr second-half-hr border px-2 py-1");
         }
     }
-        
-    // Color before/during/after time slots with Moment.js
-    timeBlock = $(initialDiv).parent().data.time;
-    i++;
+    
+
+    // Save changes
+    saveTasks($(initialDiv).text());
 });
-
-
 
 
 
