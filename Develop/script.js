@@ -8,8 +8,12 @@ var i = 0;
 $(".date").text(m);
 var currentM = moment().hour();
 
+// $(".half-hours")[1].css("background-color", "yellow"); // jQuery way not working
+// $(".half-hours")[1].style.backgroundColor = "red"; // JS way working
+
 // // COLORING BEFORE/DURING/AFTER TIME SLOTS WIH MOMENT.JS.
 function colorTimeSlots(hour){
+
     for(var i = 9; i < 18; i++){ // For as long as the ours in a work day (military time)...
         // Establish the current timeBlock
         var timeBlock = $("section#" + i + "");
@@ -36,24 +40,26 @@ function retrieveTasks(){
         var targetBlock = $(targetBlockParent).children().first();
         $(targetBlock).text(savedTasks[i][0]).attr("class", "half-hour first-half-hr border border-bottom-0 p-2 py-2")
     }
+    
 }
-retrieveTasks();
 
 function saveTasks(task, timeBlockNum){
+    debugger;
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    // Create an array for task and timeBlock
-    var taskAndTime = [task, timeBlockNum];
+    // create an array for task and timeBlock
+    var taskAndTime = [task, timeBlockNum];    
     // Push new task to your array
     savedTasks.push(taskAndTime);
     // Then push the updated array to localStorage as a string
     localStorage.setItem("tasks", JSON.stringify(savedTasks));
 }
 
+retrieveTasks();
 colorTimeSlots();
 
 // WHEN A TIME BLOCK IS CLICKED...
-$("main").on("click", ".first-half-hr", function(e){
+$("main").on("click", ".first-half-hr, .second-half-hr", function(e){
     console.log("TARGET: ", e.target);
     // Save the inital empty div
     initialDiv = e.target;
@@ -68,17 +74,15 @@ $("main").on("click", ".first-half-hr", function(e){
 });
 
 // WHEN AN OFF-CLICK (aka "BLUR") OCCURS...
-$("main").on("blur", "input", function(e){
-    e.preventDefault();
+$("main").on("blur", "input", function(){
     // Trim the input value
     var text = $(this).val().trim();
 
     // If user inputs nothing...
-    debugger;
-    if(!$(".input-to-div").text()){
-        debugger;
-        $(initialDiv).val("");
+    if(!$(".input-to-div").val()){
+        $(initialDiv).text("");
         $(this).replaceWith(initialDiv);
+        return;
     }
     else{
         // Add the input value to initialDiv
@@ -93,11 +97,8 @@ $("main").on("blur", "input", function(e){
             $(initialDiv).attr("class", "half-hr second-half-hr border px-2 py-1");
         }
     }
-    
-    // Make a event & place object
-
     // Save changes
-    saveTasks($(initialDiv).text(), $(initialDiv).parent().attr('id'));
+    saveTasks($(initialDiv).text(), $(initialDiv).parent().attr("id"));
 });
 
 
