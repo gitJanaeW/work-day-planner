@@ -3,6 +3,7 @@ var m = moment().format("dddd, MMMM Do, YYYY, h:mm a");
 var clickCount = 0;
 var initialDiv = undefined;
 var i = 0;
+var tasksArr = [];
 
 // TIMER
 $(".date").text(m);
@@ -36,15 +37,22 @@ function retrieveTasks(){
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     for(var i = 0; i < savedTasks.length; i++){
+        // The target block parent is match via time/id nums
         var targetBlockParent = $("section#" + savedTasks[i][1] + "");
+        // The first-half-hr time slot is targeted
         var targetBlock = $(targetBlockParent).children().first();
-        $(targetBlock).text(savedTasks[i][0]).attr("class", "half-hour first-half-hr border border-bottom-0 p-2 py-2")
+        // THe text is placed in the first-half-hr time slot
+        if($(targetBlock.text())){
+            $(targetBlock).text(savedTasks[i][0]).attr("class", "half-hour first-half-hr value-true border border-bottom-0 p-2 py-3");
+        }
+        else{
+            $(targetBlock).text(savedTasks[i][0]).attr("class", "half-hour first-half-hr value-true border border-bottom-0 p-2 py-1")
+        }
+        
     }
-    
 }
 
 function saveTasks(task, timeBlockNum){
-    debugger;
     // Retrieve localStorage as an array, if any. If not, create a new array
     var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     // create an array for task and timeBlock
@@ -59,7 +67,7 @@ retrieveTasks();
 colorTimeSlots();
 
 // WHEN A TIME BLOCK IS CLICKED...
-$("main").on("click", ".first-half-hr, .second-half-hr", function(e){
+$("main").on("click", ".first-half-hr", function(e){
     console.log("TARGET: ", e.target);
     // Save the inital empty div
     initialDiv = e.target;
@@ -77,12 +85,30 @@ $("main").on("click", ".first-half-hr, .second-half-hr", function(e){
 $("main").on("blur", "input", function(){
     // Trim the input value
     var text = $(this).val().trim();
-
     // If user inputs nothing...
     if(!$(".input-to-div").val()){
+        // Clear text and replace input with div
         $(initialDiv).text("");
         $(this).replaceWith(initialDiv);
-        return;
+        // If there was a value in there previously...
+        if($(initialDiv).hasClass("value-true")){
+            console.log("value was true. Removing value");
+            // Remove the "value-true" class
+            $(initialDiv).attr("class", "half-hr first-half-hr border border-bottom-0 px-2 py-3");
+            
+            var savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            var initialDivParent = $(initialDiv).parent().attr("id");
+            for(var i = 0; i < savedTasks.length; i++){
+                if(initialDivParent === savedTasks[i][1]){
+                    console.log("Matching values. Deleting old value");
+                    // Remove the item that matched
+                    $(savedTasks).splice(i, 1);
+                    console.log(savedTasks);
+                    debugger;
+                    localStorage.setItem
+                }
+            }
+        }
     }
     else{
         // Add the input value to initialDiv
@@ -91,13 +117,14 @@ $("main").on("blur", "input", function(){
         $(this).replaceWith(initialDiv);
         // Reassign classes
         if($(initialDiv).hasClass("first-half")){
-            $(initialDiv).attr("class", "half-hr first-half-hr border border-bottom-0 px-2 py-1");
+            $(initialDiv).attr("class", "half-hr first-half-hr value-true border border-bottom-0 px-2 py-1");
         }
         else{
-            $(initialDiv).attr("class", "half-hr second-half-hr border px-2 py-1");
+            $(initialDiv).attr("class", "half-hr second-half-hr value-true border px-2 py-1");
         }
     }
     // Save changes
+
     saveTasks($(initialDiv).text(), $(initialDiv).parent().attr("id"));
 });
 
