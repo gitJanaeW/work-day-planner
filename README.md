@@ -1,6 +1,6 @@
 # Work Day Scheduler Starter Code
 
-![](READMEdemo.gif)
+![](./Develop/READMEdemo.gif)
 
 ## Main Objective
 
